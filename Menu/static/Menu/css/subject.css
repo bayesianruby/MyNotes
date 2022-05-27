@@ -1,0 +1,72 @@
+
+    .MultiCarousel {
+        float: left;
+        overflow: hidden;
+        padding: 15px;
+        width: 100%;
+        position: relative;
+    }
+
+    .MultiCarousel .MultiCarousel-inner {
+        transition: 1s ease all;
+        float: left;
+    }
+
+    .MultiCarousel .MultiCarousel-inner .item {
+        float: left;
+    }
+
+    .MultiCarousel .MultiCarousel-inner .item>div {
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+        background: #f1f1f1;
+        color: #666;
+    }
+
+    .MultiCarousel .leftLst,
+    .MultiCarousel .rightLst {
+        position: absolute;
+        border-radius: 50%;
+        top: calc(50% - 20px);
+    }
+
+    .MultiCarousel .leftLst {
+        left: 0;
+    }
+
+    .MultiCarousel .rightLst {
+        right: 0;
+    }
+
+    .MultiCarousel .leftLst.over,
+    .MultiCarousel .rightLst.over {
+        pointer-events: none;
+        background: #ccc;
+    }
+    @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+.read_more {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  
+  border-radius: 0;
+  padding: 18px 80px 20px;
+  transition: all 0.7s ease-out;
+  color: black;
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  margin: 0.625rem;
+  border: none;
+  border: 1px solid rgb(34, 37, 41);
+}
+
+.read_more:hover {
+  color: #fff;
+  background-position: right center;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+{% load static %}
+<!-- Custom CSS -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" /> -->
+
+<style>
+    .hello-msg {
+        color: white;
+        margin-right: 20px;
+    }
+
+    .profile {
+        color: white;
+        margin-right: 20px;
+    }
+    #footer {
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:rgb(53, 58, 63);
+}
+</style>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> MyNotes {% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'Menu/logo/logo.png' %}" sizes="96x96">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'Menu/css/bootstrap/bootstrap.min.css' %}" /> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Jquery -->
+    <script src="{% static 'Menu/js/jquery/jquery-3.6.0.min.js' %}"></script>
+</head>
+
+<body>
+    {% load static %}
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'Menu/css/test2.css' %}" />
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+
+        <a class="navbar-brand" href="{% url 'index' %}"> <img src="{% static 'Menu/logo/grand_logo.png' %}" width="50"
+                alt="" class="d-inline-block align-middle mr-2"> MyNotes</a>
+        {% if request.user.is_authenticated %}
+        <span class="hello-msg"> Hello , {{request.user}} </span>
+
+        <!-- Quand on voulait separer les 2 interfaces : -->
+        <!-- <li>
+            <span> <a href="{% url 'user' %}" class="profile"> My sheets</a></span>
+        </li> -->
+
+        <span> <a href="{% url 'logout' %}" class="hello-msg"> Log out</a></span>
+
+        {% else %}
+
+        <span> <a href="{% url 'login' %}" class="profile"> Login</a></span>
+
+
+
+        {% endif%}
+        <form class="form-inline" method="POST" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+            <button type="submit" class="btn btn-outline-light">Search</button>
+        </form>
+    </nav>
+
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <ul class="list-unstyled components">
+                <li>
+                    <form class="form-inline" method="POST" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+                        <button type="submit" class="btn btn-outline-light">Add filters</button>
+                    </form>
+                    
+                </li>
+                {% for subject in subjects%}
+                
+                <li>
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <a href="{% url 'subject' subject.id %}"> {{subject}}</a>
+
+                    </form>
+                </li>
+                {% endfor %}
+
+                <li>
+                    <center>
+                        <!-- <form method="POST" >
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-light" name = "new_sub" value = "new_sub">New subject</button>
+                        </form>   -->
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Add a new subject"
+                                    aria-label="Add a new subject" aria-describedby="button-addon2" name="add_subject">
+                                <!-- {{ bar_form.name }} -->
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"
+                                    style="color: honeydew;" value="add_subject">Add</button>
+                            </div>
+                        </form>
+
+
+
+                    </center>
+
+                </li>
+
+            </ul>
+        </nav>
+        <div id="content">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+    </div>
+    <footer id="footer">
+       <center>
+           <p>
+          Contact : 
+            <a href="mailto:ContactUsMyNotes@gmail.com">ContactUsMyNotes@gmail.com</a>
+           </p>
+         
+       </center>
+    </footer>
+    
+</body>
+
+<script type="text/javascript" src="{% static 'Menu/js/base.js' %}"></script>
+
+</html>

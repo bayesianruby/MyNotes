@@ -1,0 +1,50 @@
+{% extends 'Menu/base_old.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" /> 
+
+{% block title %}
+
+  Fiches
+
+{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+<div class="mx-auto mb-5 p-5" style="width: 200;"> 
+  {% load crispy_forms_filters %}  
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h4>Transforme ta photo en un texte : </h4>
+    
+    {{image_form.image}}
+    <button type="submit" class="btn btn-dark btn-lg">Convertir</button>
+  </form>
+  <br>
+  <h4>Ta fiche: </h4>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ richform.media }}
+  {{ richform.richtext }}
+  <button type="submit" class="btn btn-dark btn-lg">Enregistrer</button>
+  
+  
+</form>
+
+</div>
+
+<!-- {% if img_obj %}
+  <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+  <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+{% endif %} -->
+
+
+
+{% endblock %}

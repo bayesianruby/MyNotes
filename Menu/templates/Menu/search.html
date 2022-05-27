@@ -1,0 +1,58 @@
+{% extends 'Menu/new_search.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" /> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+{% block title %}
+- Search
+{% endblock %}
+
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'Menu/css/subject.css' %}" />
+
+{% if searched %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+            <div class="MultiCarousel-inner">
+                {% for text in texts %}
+                <div class="item">
+                    <div class="pad15">
+                        <p class="lead">{{text.title}}</p>
+                        <p>{{text.date_created}}</p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+
+                                    <center>
+                                        <a class="btn btn-outline-dark"
+                                            href="{% url 'to_pdf' text.subject.id text.id %}">Read More</a>
+                                        <!-- <button type="submit" class="btn btn-outline-dark" name="button"
+                                            value="view_pdf" href="{% url 'to_pdf' text.subject.id text.id %}">View PDF</button> -->
+                                    </center>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                {% else %}
+                <h4>Nous n'avons rien trouvé ..</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+        {% endblock %}

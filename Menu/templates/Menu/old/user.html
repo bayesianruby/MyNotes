@@ -1,0 +1,72 @@
+{% extends 'Menu/base.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" />
+
+{% block title %}
+
+Fiches
+
+{% endblock %}
+
+{% block body %}
+
+{% load crispy_forms_filters %}
+
+<!--   
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ richform.media }}
+        {{ richform.as_p }}
+        <button type="submit" class="btn btn-dark btn-lg">Upload text</button>
+        
+      </form> -->
+
+
+<div class="mx-auto mb-5 p-5" style="width: 200;">
+  <div class="row">
+
+
+    <div class="col-8">
+      {% load crispy_forms_filters %}
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-dark btn-lg">Upload image</button>
+      </form>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ richform.media }}
+        {{ richform.as_p }}
+        <button type="submit" class="btn btn-dark btn-lg">Upload text</button>
+        {% for text_form in all_text_form%}
+        <div>
+        {% csrf_token %}
+        {{ text_form.media }}
+        {{text_form.as_p}}
+        </div>
+
+        {% endfor %}
+        
+
+      </form>
+    </div>
+    <div class="col-4">
+      {% for subject in subjects%}
+      <div>
+        <button class="btn btn-dark btn-lg"> {{subject}}</button>
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'Menu/base.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" />
+
+
+{% block title %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+
+<div class="mx-auto mb-5 p-5" style="width: 200;">
+  {% load crispy_forms_filters %}
+
+  <form method="POST" enctype="multipart/form-data" id="image_form">
+    {% csrf_token %}
+    <h4>Transforme ta photo en un texte : </h4>
+
+    {{image_form.image}}
+    <button type="submit" class="btn btn-dark btn-lg" name="form_type" value="convertir">Convertir</button>
+  </form>
+  <br>
+  <h4>Ta fiche: </h4>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label class="form-label"> Titre: </label>
+      {{ richform.title }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label"> Sujet: </label>
+      {{ richform.subject }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label"> Prof: </label>
+      {{ richform.teacher }}
+    </div>
+    <div class="mb-3">
+      <button type="button" class="btn btn-outline-dark" id="choose_text">Texte</button>
+      <button type="button" class="btn btn-outline-dark" id="choose_pdf">PDF</button>
+    </div>
+    
+
+    <div class="mb-3" id="text_form">
+      <label class="form-label"> Texte: </label>
+      {{ richform.media }}
+      {{ richform.richtext }}
+    </div>
+
+    <div class="mb-3" id="pdf_form">
+      <label class="form-label"> PDF: </label>
+      {{ richform.media }}
+      {{ richform.pdf }}
+    </div>
+    
+
+    <button type="submit" class="btn btn-dark btn-lg" name="form_type" value="enregistrer">Enregistrer</button>
+
+  </form>
+
+</div>
+
+<!-- {% if img_obj %}
+  <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+  <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+{% endif %} -->
+
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'Menu/base.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" /> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+{% block title %}
+- {{current_subject}}
+{% endblock %}
+
+{% block body %}
+
+
+
+
+
+<div class="mx-auto mb-5 p-5" style="width: 200;">
+  {% load crispy_forms_filters %}
+  
+  <div class="row">
+    <div class="col">
+      <h4>Ta fiche: </h4>
+    </div>
+    <div class="col">
+      <h4> <a href="{% url 'index' current_subject.id %}"><span  class="badge bg-secondary">Nouvelle fiche</span> </a></h4>
+    </div>
+  </div>
+
+  
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label class="form-label"> Titre: </label>
+      {{ richform.title }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label"> Sujet: </label>
+      {{ richform.subject }}
+    </div>
+
+    {% if is_a_pdf %}
+    <div class="mb-3">
+      <label class="form-label"> PDF: </label>
+      <button type="submit" class="btn btn-outline-dark" name="button" value="view_pdf">View PDF</button>
+      {{ richform.media }}
+      <!-- {{ richform.pdf }} -->
+      
+    </div>
+
+    {% else %}
+    <div class="mb-3">
+      <label class="form-label"> Texte: </label>
+      {{ richform.media }}
+      {{ richform.richtext }}
+    </div>
+    
+    {% endif %}
+    
+    
+
+    <button type="submit" class="btn btn-dark btn-lg" name="form_type" value="enregistrer">Enregistrer</button>
+    <button type="submit" class="btn btn-danger" name="button" value="Delete">Delete</button>
+    {% if not is_a_pdf %}
+    <button type="submit" class="btn btn-outline-dark" name="button" value="to_pdf">Convert to PDF</button>
+    {% endif %}
+  </form>
+
+ 
+
+</div>
+
+<!-- {% if img_obj %}
+  <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+  <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+{% endif %} -->
+
+
+{% endblock %}
+

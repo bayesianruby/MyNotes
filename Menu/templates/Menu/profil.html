@@ -1,0 +1,46 @@
+{% extends 'Menu/base.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" />
+
+
+{% block title %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+
+<div class="mx-auto mb-5 p-5" style="width: 200;">
+
+    <div class="row align-items-start">
+        <div class="col">
+            <center>
+                <h4> {{request.user}} </h4>
+            </center>
+        </div>
+
+    </div>
+
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label"> Université ou Ecole: </label>
+            {{ UserForm.university }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label"> Année: </label>
+            {{ UserForm.year }}
+        </div>
+        <button type="submit" class="btn btn-dark btn-lg" name="form_type" value="enregistrer">Enregistrer</button>
+    </form>
+
+</div>
+
+{% endblock %}

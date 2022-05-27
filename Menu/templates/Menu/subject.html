@@ -1,0 +1,79 @@
+{% extends 'Menu/base.html' %}
+{% load static %}
+
+<!-- Custom CSS -->
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'Menu/css/base.css' %}" /> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+{% block title %}
+
+-  {{current}}
+
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'Menu/css/subject.css' %}" />
+
+
+<div class="mx-auto mb-5 p-5" style="width: 200;">
+            
+            <div class="row align-items-start">
+                <div class="col">
+                    <center>
+                        <h4> {{current}} </h4>
+                    </center>
+                </div>
+                <div class="col">
+                    <center>
+                        
+                        <h4> <a href="{% url 'index' current.id %}"><span  class="badge bg-secondary">Nouvelle fiche</span> </a></h4>
+                    {% if button_delete %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" value="delete" name="delete">  Supprimer sujet</button>
+                    </form>
+                    {% endif %}
+                    </center>
+                    
+                </div>
+              </div>
+    
+    
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                <div class="MultiCarousel-inner">
+                    {% for text in texts %}
+                    <div class="item">
+                        <div class="pad15">
+                            <p class="lead">{{text.title}}</p>
+                            <p>{{text.date_created}}</p>
+                            <!-- <a href="{% url 'logout' %}"> View More</a> -->
+
+                            <div class="container">
+                                <div class="row">
+                                    <a class="read_more" href="{% url 'text' subject_id text.id%}">Read More</a>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+    {% endblock %}
