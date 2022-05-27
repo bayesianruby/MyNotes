@@ -1,6 +1,12 @@
 ProjectNotes/
 Menu/migrations/
 Menu/__pycache__/
+Menu/static/Menu/css/bootstrap/
+Menu/static/Menu/js/bootstrap/
+Menu/static/Menu/js/jquery/
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
